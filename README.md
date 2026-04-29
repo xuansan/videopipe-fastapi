@@ -97,5 +97,9 @@ cd web
 npm install
 npm run dev
 
+通过网盘分享的文件：videopipe-fastapi
+链接: https://pan.baidu.com/s/1VaNQOr9I9XHOy_6AXqwXZQ?pwd=i4cy 提取码: i4cy
+
+
 
 具体看文件内容AI写的有问题还没改完
