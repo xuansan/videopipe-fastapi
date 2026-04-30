@@ -1,0 +1,37 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: docker.1ms.run/postgres:15.4
+    container_name: pg-prod
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: SecurePwd@2025
+      POSTGRES_USER: prod_user
+      POSTGRES_DB: prod_db
+      TZ: Asia/Shanghai
+      LC_ALL: C.UTF-8
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --lc-collate=C --lc-ctype=C"
+    volumes:
+      - /opt/pg/data:/var/lib/postgresql/data
+      - /opt/pg/conf:/etc/postgresql/15/main
+      - /opt/pg/logs:/var/log/postgresql
+    command: >
+      postgres
+      -c max_connections=300
+      -c shared_buffers=1GB
+      -c work_mem=64MB
+      -c maintenance_work_mem=256MB
+      -c timezone=Asia/Shanghai
+      -c log_statement=ddl
+      -c log_min_duration_statement=1000
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 1G
